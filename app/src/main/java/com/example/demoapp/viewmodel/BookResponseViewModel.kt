@@ -10,7 +10,7 @@ class BookResponseViewModel(application: Application) : AndroidViewModel(applica
 
     init {
         webSearchRepository = WebSearchRepository()
-        bookResponseLiveData = webSearchRepository.getBookResponseData()
+        bookResponseLiveData = webSearchRepository.getBookResponseLiveData()
     }
 
     fun searchBooks() {

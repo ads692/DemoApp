@@ -36,12 +36,12 @@ class WebSearchRepository {
         })
     }
 
-    fun getBookResponseData(): MutableLiveData<List<Book>> = bookResponseLiveData
+    fun getBookResponseLiveData(): MutableLiveData<List<Book>> = bookResponseLiveData
 
     companion object {
         private const val BOOK_SEARCH_BASE_URL = "http://de-coding-test.s3.amazonaws.com"
         private lateinit var bookSearchAPI: BookSearchAPI
-        lateinit var bookResponseLiveData: MutableLiveData<List<Book>>
+        private lateinit var bookResponseLiveData: MutableLiveData<List<Book>>
         private val moshi: Moshi = Moshi.Builder().add(KotlinJsonAdapterFactory()).build()
     }
 }
