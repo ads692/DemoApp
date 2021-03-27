@@ -3,8 +3,13 @@ package com.example.demoapp.repository
 import androidx.lifecycle.MutableLiveData
 import com.example.demoapp.apis.BookSearchAPI
 import com.example.demoapp.model.Book
-import retrofit2.*
-import retrofit2.converter.gson.GsonConverterFactory
+import com.squareup.moshi.Moshi
+import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
+import retrofit2.Retrofit
+import retrofit2.converter.moshi.MoshiConverterFactory
 
 class WebSearchRepository {
     init {
@@ -12,7 +17,7 @@ class WebSearchRepository {
 
         bookSearchAPI = Retrofit.Builder()
                 .baseUrl(BOOK_SEARCH_BASE_URL)
-                .addConverterFactory(GsonConverterFactory.create())
+                .addConverterFactory(MoshiConverterFactory.create(moshi))
                 .build()
                 .create(BookSearchAPI::class.java)
     }
@@ -37,5 +42,6 @@ class WebSearchRepository {
         private const val BOOK_SEARCH_BASE_URL = "http://de-coding-test.s3.amazonaws.com"
         private lateinit var bookSearchAPI: BookSearchAPI
         lateinit var bookResponseLiveData: MutableLiveData<List<Book>>
+        private val moshi: Moshi = Moshi.Builder().add(KotlinJsonAdapterFactory()).build()
     }
 }
